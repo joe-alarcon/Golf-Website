@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block content %}
+
+<h2> Sign Up </h2>
+
+<form action="/signup" method='post'>
+{{ form.hidden_tag() }}
+{{ form.name.label }}
+{{ form.name() }}
+{{ form.supusername.label }}
+{{ form.supusername() }}
+{{ form.handicap.label }}
+{{ form.handicap() }}
+{{ form.email.label }}
+{{ form.email() }}
+{{ form.suppassword.label }}
+{{ form.suppassword() }}
+{{ form.supsubmit() }}
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% endblock %}

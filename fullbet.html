@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% block content %}
+
+<h2> Bet for {{ bet.player_name }} v {{ bet.opponent_name }}</h2>
+<a href="/{{ username }}">Go Back</a>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Course</th>
+    <th>Strokes Exchanged</th>
+    <th>Net Units</th>
+    <th>Total Num of Pressures</th>
+    <th>Match</th>
+  </tr>
+  <tr>
+    <td>{{ bet.date }}</td>
+    <td style="text-align:center;">{{ bet.course_name }}</td>
+    <td style="text-align:center;">{{ bet.strokes_exchanged }}</td>
+    <td style="text-align:center;">{{ bet.net_units }}</td>
+    <td style="text-align:center;">{{ bet.total_pressures }}</td>
+    <td style="text-align:center;">{{ bet.match }}</td>
+  </tr>
+</table>
+
+<h3> Pressures throughout the game </h3>
+<p> {{ bet.hole_string }} </p>
+<p> {{ bet.pressures_string1 }} </p>
+<p> {{ bet.pressures_string2 }} </p>
+<p> {{ bet.pressures_string3 }} </p>
+<p> {{ bet.pressures_string4 }} </p>
+<p> {{ bet.pressures_string5 }} </p>
+
+{% endblock %}

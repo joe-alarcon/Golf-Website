@@ -1,0 +1,168 @@
+{% extends "index.html" %}
+{% block content %}
+
+<h2> Welcome {{ player.name }} </h2>
+<p> Handicap: {{ player.handicap }} </p>
+<a href="/logout">Log Out</a>
+
+<h3>Update Password</h3>
+<form method='post'>
+{{ passform.hidden_tag() }}
+{{ passform.newpassword.label }}
+{{ passform.newpassword() }}
+{{ passform.passubmit() }}
+</form>
+
+<h3>Update Handicap</h3>
+<form method='post'>
+{{ update_handi.hidden_tag() }}
+{{ update_handi.new_handi.label }}
+{{ update_handi.new_handi() }}
+{{ update_handi.uphandisubmit() }}
+</form>
+
+<h3>Scores</h3>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Course</th>
+    <th>Hole 1</th>
+    <th>Hole 2</th>
+    <th>Hole 3</th>
+    <th>Hole 4</th>
+    <th>Hole 5</th>
+    <th>Hole 6</th>
+    <th>Hole 7</th>
+    <th>Hole 8</th>
+    <th>Hole 9</th>
+    <th>Hole 10</th>
+    <th>Hole 11</th>
+    <th>Hole 12</th>
+    <th>Hole 13</th>
+    <th>Hole 14</th>
+    <th>Hole 15</th>
+    <th>Hole 16</th>
+    <th>Hole 17</th>
+    <th>Hole 18</th>
+    <th>Total strokes</th>
+    <th>Compared to par</th>
+  </tr>
+{% for score in player.scores %}
+  <tr>
+    <td>{{ score.date }}</td>
+    <td>{{ score.course_name }}</td>
+    {% for num in score.score_by_hole.get() %}
+    <td style="text-align:center;">{{ num }}</td>
+    {% endfor %}
+    <td style="text-align:center;">{{ score.total }}</td>
+    <td style="text-align:center;">{{ score.score_compared_to_par }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+<h3>Add a Score and Bets</h3>
+<form method='post'>
+{{ addsc.hidden_tag() }}
+{{ addsc.addsccoursename.label }}
+{{ addsc.addsccoursename() }}
+{{ addsc.addscdate.label }}
+{{ addsc.addscdate() }}
+{{ addsc.hole_1.label }}
+{{ addsc.hole_1() }}
+{{ addsc.hole_2.label }}
+{{ addsc.hole_2() }}
+{{ addsc.hole_3.label }}
+{{ addsc.hole_3() }}
+{{ addsc.hole_4.label }}
+{{ addsc.hole_4() }}
+{{ addsc.hole_5.label }}
+{{ addsc.hole_5() }}
+{{ addsc.hole_6.label }}
+{{ addsc.hole_6() }}
+{{ addsc.hole_7.label }}
+{{ addsc.hole_7() }}
+{{ addsc.hole_8.label }}
+{{ addsc.hole_8() }}
+{{ addsc.hole_9.label }}
+{{ addsc.hole_9() }}
+{{ addsc.hole_10.label }}
+{{ addsc.hole_10() }}
+{{ addsc.hole_11.label }}
+{{ addsc.hole_11() }}
+{{ addsc.hole_12.label }}
+{{ addsc.hole_12() }}
+{{ addsc.hole_13.label }}
+{{ addsc.hole_13() }}
+{{ addsc.hole_14.label }}
+{{ addsc.hole_14() }}
+{{ addsc.hole_15.label }}
+{{ addsc.hole_15() }}
+{{ addsc.hole_16.label }}
+{{ addsc.hole_16() }}
+{{ addsc.hole_17.label }}
+{{ addsc.hole_17() }}
+{{ addsc.hole_18.label }}
+{{ addsc.hole_18() }}
+{{ addsc.bet.label }}
+{{ addsc.bet() }}
+{{ addsc.dictionary.label }}
+{{ addsc.dictionary() }}
+{{ addsc.addscsubmit() }}
+</form>
+
+<h3>Bets</h3>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Course</th>
+    <th>Opponent Name</th>
+    <th>Strokes Exchanged</th>
+    <th>Net Units</th>
+    <th>Total Num of Pressures</th>
+    <th>Match</th>
+    <th>See full scheme</th>
+  </tr>
+{% for bet in player.bets %}
+  <tr>
+    <td>{{ bet.date }}</td>
+    <td>{{ bet.course_name }}</td>
+    <td style="text-align:center;">{{ bet.opponent_name }}</td>
+    <td style="text-align:center;">{{ bet.strokes_exchanged }}</td>
+    <td style="text-align:center;">{{ bet.net_units }}</td>
+    <td style="text-align:center;">{{ bet.total_pressures }}</td>
+    <td style="text-align:center;">{{ bet.match }}</td>
+    <td style="text-align:center;"><a href="/{{ player.username }}/bet{{ bet.id }}">Bet {{ bet.id }}</a></td>
+  </tr>
+{% endfor %}
+</table>
+
+<h3>Refresh Bets</h3>
+<form method='post'>
+{{ refresh_bets.hidden_tag() }}
+{{ refresh_bets.refresh.label }}
+{{ refresh_bets.refresh() }}
+{{ refresh_bets.rbetplayername.label }}
+{{ refresh_bets.rbetplayername() }}
+{{ refresh_bets.rbetstrokes.label }}
+{{ refresh_bets.rbetstrokes() }}
+{{ refresh_bets.rbetcoursename.label }}
+{{ refresh_bets.rbetcoursename() }}
+{{ refresh_bets.rbetdate.label }}
+{{ refresh_bets.rbetdate() }}
+{{ refresh_bets.rbetsubmit() }}
+</form>
+
+
+<h3>Return Statements</h3>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+
+
+{% endblock %}
